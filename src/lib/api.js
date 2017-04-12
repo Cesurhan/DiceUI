@@ -5,7 +5,8 @@ import feathers from 'feathers-client'
 class API {
   constructor() {
     // Establish a Socket.io connection
-    const socket = io('https://shutup.codaisseur.cloud')
+    // const socket = io('https://shutup.codaisseur.cloud')
+    const socket = io('localhost:3030')
     // Initialize our Feathers client application through Socket.io
     // with hooks and authentication.
     this.app = feathers()

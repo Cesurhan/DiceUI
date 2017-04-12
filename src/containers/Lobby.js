@@ -4,6 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import { connect } from 'react-redux'
 import subscribeToGames from '../actions/games/subscribe'
 import createGame from '../actions/games/create'
+import joinGame from '../actions/games/join'
 import './Lobby.sass'
 
 class Lobby extends PureComponent {
@@ -17,6 +18,14 @@ class Lobby extends PureComponent {
       label="Create Game"
       primary={true} />
   }
+
+  renderJoinGameButton() {
+    return <RaisedButton
+      onTouchTap={this.props.joinGame(game._id)}
+      label="Join Game"
+      primary={true} />
+  }
+
   render() {
     return (
       <div className="games lobby">
@@ -37,7 +46,7 @@ class Lobby extends PureComponent {
                 <Paper
                   zDepth={1}
                   style={{ padding: '12px 24px' }}>
-                  <h4>{ game.title }</h4>
+                  <h4>{ game.title } { game.playerIds.length < 2 && <button onClick={() => {this.props.joinGame(game._id)}}>Join</button> }</h4>
                 </Paper>
               )
             })}
@@ -49,4 +58,4 @@ class Lobby extends PureComponent {
 }
 
 const mapStateToProps = ({ games }) => ({ games })
-export default connect(mapStateToProps, { subscribeToGames, createGame })(Lobby)
+export default connect(mapStateToProps, { subscribeToGames, createGame, joinGame })(Lobby)
