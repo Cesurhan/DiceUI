@@ -6,6 +6,10 @@ import subscribeToGames from '../actions/games/subscribe'
 import createGame from '../actions/games/create'
 import joinGame from '../actions/games/join'
 import './Lobby.sass'
+import GAME_PATH from '../routes'
+import { history } from '../store'
+
+
 
 class Lobby extends PureComponent {
   componentWillMount() {
@@ -25,6 +29,9 @@ class Lobby extends PureComponent {
       label="Join Game"
       primary={true} />
   }
+
+
+
 
   render() {
     return (
@@ -46,7 +53,9 @@ class Lobby extends PureComponent {
                 <Paper
                   zDepth={1}
                   style={{ padding: '12px 24px' }}>
-                  <h4>{ game.title } { game.playerIds.length < 2 && <button onClick={() => {this.props.joinGame(game._id)}}>Join</button> }</h4>
+                  <h4>{ game.title } { game.playerIds.length < 2 && <button onClick={() => {
+                    this.props.joinGame(game._id)
+                    history.push('/game/' + game._id)}}>Join</button> }</h4>
                 </Paper>
               )
             })}
