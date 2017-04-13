@@ -23,16 +23,6 @@ class Lobby extends PureComponent {
       primary={true} />
   }
 
-  renderJoinGameButton() {
-    return <RaisedButton
-      onTouchTap={this.props.joinGame(game._id)}
-      label="Join Game"
-      primary={true} />
-  }
-
-
-
-
   render() {
     return (
       <div className="games lobby">
@@ -55,7 +45,7 @@ class Lobby extends PureComponent {
                   style={{ padding: '12px 24px' }}>
                   <h4>{ game.title } { game.playerIds.length < 2 && <button onClick={() => {
                     this.props.joinGame(game._id)
-                    history.push('/game/' + game._id)}}>Join</button> }</h4>
+                    history.push('/games/' + game._id)}}>Join</button> }</h4>
                 </Paper>
               )
             })}
@@ -66,5 +56,7 @@ class Lobby extends PureComponent {
   }
 }
 
+
+/// (ReduxStore) => (this.props)
 const mapStateToProps = ({ games }) => ({ games })
 export default connect(mapStateToProps, { subscribeToGames, createGame, joinGame })(Lobby)
