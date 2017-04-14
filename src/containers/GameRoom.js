@@ -2,6 +2,7 @@ import React, { PureComponent} from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 import { connect } from 'react-redux'
 import subscribeToGames from '../actions/games/subscribe'
+import throwDice from '../actions/games/throwDice'
 
 
 class GameRoom extends PureComponent {
@@ -13,15 +14,15 @@ class GameRoom extends PureComponent {
     })
     const ourGame = ourGameArray[0]
 
-    console.error(ourGame)
-
+    // console.error(ourGame)
     //this.props.games = [array]
 
     return (
       <div className="container col-md-offset-4">
-        <h2>GameId: {gameId}</h2>
         <h1>The Winning Number is: {ourGame.winningNumber}</h1>
-        <RaisedButton label="Throw Dice" primary={true} />
+
+        <button onClick={() => {
+          this.props.throwDice(gameId)}}>Throw Dice</button>
       </div>
     )
   }
@@ -29,4 +30,4 @@ class GameRoom extends PureComponent {
 
 
 const mapStateToProps = ({ games }) => ({ games })
-export default connect(mapStateToProps, { subscribeToGames })(GameRoom)
+export default connect(mapStateToProps, { subscribeToGames, throwDice })(GameRoom)

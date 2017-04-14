@@ -1,13 +1,16 @@
-import { CALL_API, UPDATE } from '../../middleware/api'
+import { CALL_API, PATCH } from '../../middleware/api'
 
 export default (gameId) => {
+  console.error("ACTION")
   return {
     [CALL_API]: {
-      service: 'game',
-      method: UPDATE,
-      // type: 'GAME_UPDATED',
+      service: 'games',
+      method: PATCH,
       authenticate: true,
-      params: { diceThronw: true },
+      params: {
+        // joinGame: true,
+        startGame: true,
+       },
       id: gameId,
     }
   }
