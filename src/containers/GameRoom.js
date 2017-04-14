@@ -7,10 +7,20 @@ import throwDice from '../actions/games/throwDice'
 
 class GameRoom extends PureComponent {
 
+  constructor() {
+    super()
+
+    this.state = {
+      diceHolder: ''
+    }
+  }
+
   throwDiceAnime(gameId) {
-    document.getElementById("dice-holder").innerHTML = "<img src='http://bestanimations.com/Games/Dice/rolling-dice-gif-3.gif' height='100em'/>"
+    this.setState({
+      diceHolder:'http://bestanimations.com/Games/Dice/rolling-dice-gif-3.gif'
+    })
     setTimeout(() => {
-      document.getElementById("dice-holder").innerHTML = ""
+      this.setState({diceHolder: ''})
       this.props.throwDice(gameId)
     },500)
   }
@@ -53,14 +63,15 @@ class GameRoom extends PureComponent {
     const { isWinner} = ourGame
 
     return (
-      <div className="container col-md-offset-4 text-center">
+      <div className="container text-center">
         <h1>The Winning Number is: {winningNumber}</h1>
         <h2>Thrown Dice: {thrownDice}</h2>
           <RaisedButton id = "throw-dice-button" label = {this.raisedButtonLabel(isWinner)} disabled={this.buttonDisabler(isWinner)} secondary={true} onTouchTap = {() => {this.throwDiceAnime(gameId)} }/>
           <div id="display-winner">
             <h1>{this.checkIfThereIsAWinner(winnerName)}</h1>
           </div>
-          <div id="dice-holder">
+          <div>
+          <img src={ this.state.diceHolder } height="100em" />
           </div>
       </div>
     )
