@@ -17,10 +17,13 @@ class GameRoom extends PureComponent {
     // console.error(ourGame)
     //this.props.games = [array]
 
+    const { winningNumber } = ourGame
+    const { thrownDice } = ourGame
+
     return (
       <div className="container col-md-offset-4">
-        <h1>The Winning Number is: {ourGame.winningNumber}</h1>
-
+        <h1>The Winning Number is: {winningNumber}</h1>
+        <h2>Thrown Dice: {thrownDice}</h2>
         <button onClick={() => {
           this.props.throwDice(gameId)}}>Throw Dice</button>
       </div>
