@@ -13,16 +13,26 @@ class GameRoom extends PureComponent {
       document.getElementById("dice-holder").innerHTML = ""
       this.props.throwDice(gameId)
     },500)
-
-    // if (1 == 1){
-    //   document.getElementById("display-winner").innerHTML = "<h1>The Winner is: " + "Ces";
-    // }
   }
 
   checkIfThereIsAWinner(winnerName){
     let announcement = "The winner is: "
     if (winnerName != null) {
       return announcement + winnerName
+    }
+  }
+
+  buttonDisabler(isWinner) {
+    if (isWinner) {
+      return 'disabled'
+    }
+  }
+
+  raisedButtonLabel(isWinner){
+    if (isWinner) {
+      return 'Game Over'
+    } else {
+      return 'Throw Dice'
     }
   }
 
@@ -40,12 +50,13 @@ class GameRoom extends PureComponent {
     const { winningNumber } = ourGame
     const { thrownDice } = ourGame
     const { winnerName } = ourGame
+    const { isWinner} = ourGame
 
     return (
       <div className="container col-md-offset-4 text-center">
         <h1>The Winning Number is: {winningNumber}</h1>
         <h2>Thrown Dice: {thrownDice}</h2>
-          <RaisedButton label = "Throw Dice" secondary = {true} onTouchTap = {() => {this.throwDiceAnime(gameId)} }/>
+          <RaisedButton id = "throw-dice-button" label = {this.raisedButtonLabel(isWinner)} disabled={this.buttonDisabler(isWinner)} secondary={true} onTouchTap = {() => {this.throwDiceAnime(gameId)} }/>
           <div id="display-winner">
             <h1>{this.checkIfThereIsAWinner(winnerName)}</h1>
           </div>
